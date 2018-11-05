@@ -1,0 +1,32 @@
+{
+  "name": "pixels",
+  "version": "1.0.0",
+  "description": "A pixel canvas anyone can draw on",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qwertyquerty/pixels.git"
+  },
+  "keywords": [
+    "Pixel",
+    "Canvas",
+    "socketio",
+    "reddit",
+    "place"
+  ],
+  "author": "qwertyquerty",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qwertyquerty/pixels/issues"
+  },
+  "homepage": "https://github.com/qwertyquerty/pixels#readme"
+}
