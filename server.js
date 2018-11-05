@@ -6,7 +6,9 @@ function zeros(dimensions) {
     return array;
 }
 
-var DIM = [200, 300];
+var cfg = require('./config.json');
+
+var DIM = cfg["dim"];
 var pixels;
 var express = require('express');
 var app = express();
@@ -17,10 +19,10 @@ var fs = require('fs');
 var ratelimits = {};
 
 try {
-    pixels = JSON.parse(fs.readFileSync("./pixels.json", "utf8"));
+    pixels = JSON.parse(fs.readFileSync(cfg["pixels_path"], "utf8"));
 }
 catch (e) {
-    pixels = zeros(DIM);
+    pixels = zeros([DIM[1], DIM[0]]);
     console.log(e);
 }
 
@@ -63,20 +65,19 @@ io.on('connection', function(socket) {
 setInterval(function() {
     io.emit("init", pixels);
     io.emit("users", io.engine.clientsCount);
-}, 10000);
+}, cfg["init_interval"]);
 
 setInterval(function() {
     fs.writeFile(
-        './pixels.json',
+        cfg["pixels_path"],
         JSON.stringify(pixels),
         function(err) {
             if (err) {}
         }
     );
-}, 60000);
+}, cfg["save_interval"]);
 
-var ipaddress = "0.0.0.0"
-var serverport = 40
-http.listen(serverport, ipaddress, function() {
-    console.log('[DEBUG] Listening on ' + ipaddress + ':' + serverport);
+
+http.listen(cfg["port"], cfg["host"], function() {
+    console.log('[DEBUG] Listening on ' + cfg["host"] + ':' + cfg["port"]);
 });
