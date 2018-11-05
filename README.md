@@ -34,6 +34,12 @@ A pixel canvas anyone can draw on.
 - `init_interval`: How often to send the entire board to every client to correct mistakes (like unrecieved pixel changes)
 - `pixels_path`: The JSON file to save the pixels to
 
+## Server
+
+### Vanilla Client Code: [http://142.93.72.14:40/](http://142.93.72.14:40/)
+
+### Alternate Client Code: [http://draw.al1l.com/](http://draw.al1l.com/)
+
 ## Example
 
 ![https://i.imgur.com/ROEnFig.png](https://i.imgur.com/ROEnFig.png)
