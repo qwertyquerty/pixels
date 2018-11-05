@@ -1,0 +1,78 @@
+<canvas id="can"></canvas>
+<style>body,html{margin: 0;} #can{touch-action: manipulation;}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+<script>
+var io = io();
+
+function getTouchPos(c, e) {
+    var rct = c.getBoundingClientRect();
+    return {
+        x: e.touches[0].clientX - rct.left,
+        y: e.touches[0].clientY - rct.top
+    }
+}
+
+function getMousePos(c, e) {
+    var rct = c.getBoundingClientRect();
+    return {
+        x: e.clientX - rct.left,
+        y: e.clientY - rct.top
+    }
+}
+
+
+$("#can").bind('click', function(e) {
+    var p = getMousePos(canvas, e);
+    var p = {
+        x: Math.floor(p.x / SCALE),
+        y: Math.floor(p.y / SCALE)
+    }
+    io.emit("flip", p)
+
+})
+
+var canvas = document.getElementById("can")
+
+
+var ctx = canvas.getContext('2d');
+var SCALE = 10;
+var DIMS;
+var pixels = []
+
+function mark(x, y, c) {
+    if (c === 1) {
+        ctx.fillStyle = "#FFF";
+    }
+    else {
+        ctx.fillStyle = "#000";
+    }
+    ctx.fillRect(x * SCALE, y * SCALE, SCALE, SCALE);
+}
+
+function draw(pixels) {
+    for (var y = 0; y < pixels.length; y++) {
+        for (var x = 0; x < pixels[y].length; x++) {
+            mark(x, y, pixels[y][x]);
+        }
+    }
+}
+
+io.on("init", function(px) {
+    console.log("INIT");
+    DIMS = [px[0].length, px.length]
+    pixels = px
+    canvas.width = SCALE * DIMS[0];
+    canvas.height = SCALE * DIMS[1];
+    draw(px);
+});
+
+io.on("users", function(users) {
+    window.document.title = users + " Clients Online"
+});
+
+io.on("flip", function(p) {
+    pixels[p.y][p.x] = +(!pixels[p.y][p.x]);
+    mark(p.x, p.y, pixels[p.y][p.x])
+});
+</script>
