@@ -4,13 +4,13 @@ A pixel canvas anyone can draw on.
 
 ## Setup
 
-`git clone https://github.com/qwertyquerty/pixels`
+**`git clone https://github.com/qwertyquerty/pixels`**
 
-`cd pixels`
+**`cd pixels`**
 
-`npm i`
+**`npm i`**
 
-`npm start`
+**`npm start`**
 
 ## Example
 
