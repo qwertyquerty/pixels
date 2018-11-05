@@ -10,7 +10,7 @@ A pixel canvas anyone can draw on.
 
 - **`npm i`**
 
-- **`npm start`**
+- **`npm start`** or **`pm2 start server.js -n pixels`**
 
 ## Example
 
