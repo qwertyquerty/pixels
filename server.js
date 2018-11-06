@@ -37,11 +37,13 @@ io.on('connection', function(socket) {
         if (ratelimits[socket.id] && ((new Date()).getTime() - ratelimits[socket.id]) >= 100) {
             ratelimits[socket.id] = (new Date()).getTime();
             try {
-                pixels[p.y][p.x] = +(!pixels[p.y][p.x]);
-                io.emit('flip', {
-                    x: p.x,
-                    y: p.y
-                });
+                if (p.y < DIM[1] && p.x < DIM[0] && p.y>=0 && p.x >= 0) {
+                    pixels[p.y][p.x] = +(!pixels[p.y][p.x]);
+                    io.emit('flip', {
+                        x: p.x,
+                        y: p.y
+                    });
+                }
             }
             catch (e) {
             }
@@ -49,11 +51,13 @@ io.on('connection', function(socket) {
         else if (!ratelimits[socket.id]) {
             ratelimits[socket.id] = (new Date()).getTime();
             try {
-                pixels[p.y][p.x] = +(!pixels[p.y][p.x]);
-                io.emit('flip', {
-                    x: p.x,
-                    y: p.y
-                });
+                if (p.y < DIM[1] && p.x < DIM[0] && p.y>=0 && p.x >= 0) {
+                    pixels[p.y][p.x] = +(!pixels[p.y][p.x]);
+                    io.emit('flip', {
+                        x: p.x,
+                        y: p.y
+                    });
+                }
             }
             catch (e) {
               console.log(e);
