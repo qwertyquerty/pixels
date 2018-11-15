@@ -43,12 +43,7 @@ var DIMS;
 var pixels = []
 
 function mark(x, y, c) {
-    if (c === 1) {
-        ctx.fillStyle = "#FFF";
-    }
-    else {
-        ctx.fillStyle = "#000";
-    }
+    ctx.fillStyle = colors[c];
     ctx.fillRect(x * SCALE, y * SCALE, SCALE, SCALE);
 }
 
