@@ -5,6 +5,5 @@
  "save_interval": 60000,
  "init_interval": 10000,
  "pixels_path": "./pixels.json",
- "colors": ["#000000", "#FFFFFF", "#880000", "#AAFFEE", "#CC44CC", "#00CC55", "#0000AA", "#EEEE77", "#DD8855", "#664400", "#FF7777", "#333333", "#777777", "#AAFF66", "#0088FF", "#BBBBBB"],
  "default_color": 0
 }

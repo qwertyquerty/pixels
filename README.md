@@ -23,7 +23,8 @@ A pixel canvas anyone can draw on.
  "dim": [300,200],
  "save_interval": 60000,
  "init_interval": 10000,
- "pixels_path": "./pixels.json"
+ "pixels_path": "./pixels.json",
+ "default_color": "0"
 }
 ```
 
@@ -33,6 +34,7 @@ A pixel canvas anyone can draw on.
 - `save_interval`: How often to save the board to `pixels_path` in case the server crashes, it can recover the pixels
 - `init_interval`: How often to send the entire board to every client to correct mistakes (like unrecieved pixel changes)
 - `pixels_path`: The JSON file to save the pixels to
+- `default_color`: The default color for the board
 
 ## Server
 

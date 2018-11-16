@@ -16,6 +16,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var fs = require('fs');
 
+var colors = ["#000000", "#FFFFFF", "#880000", "#AAFFEE", "#CC44CC", "#00CC55", "#0000AA", "#EEEE77", "#DD8855", "#664400", "#FF7777", "#333333", "#777777", "#AAFF66", "#0088FF", "#BBBBBB"];
+
 var ratelimits = {};
 
 try {
@@ -37,7 +39,7 @@ io.on('connection', function(socket) {
         if (ratelimits[socket.id] && ((new Date()).getTime() - ratelimits[socket.id]) >= 100) {
             ratelimits[socket.id] = (new Date()).getTime();
             try {
-                if (p.y < DIM[1] && p.x < DIM[0] && p.y>=0 && p.x >= 0 && Number.isInteger(p.c) && p.c >=0 && p.c <= 15) {
+                if (p.y < DIM[1] && p.x < DIM[0] && p.y>=0 && p.x >= 0 && Number.isInteger(p.c) && p.c >=0 && p.c < colors.length) {
                     pixels[p.y][p.x] = p.c
                     io.emit('set', {
                         x: p.x,
@@ -52,7 +54,7 @@ io.on('connection', function(socket) {
         else if (!ratelimits[socket.id]) {
             ratelimits[socket.id] = (new Date()).getTime();
             try {
-                if (p.y < DIM[1] && p.x < DIM[0] && p.y>=0 && p.x >= 0 && Number.isInteger(p.c) && p.c >=0 && p.c <= 15) {
+                if (p.y < DIM[1] && p.x < DIM[0] && p.y>=0 && p.x >= 0 && Number.isInteger(p.c) && p.c >=0 && p.c < colors.length) {
                     pixels[p.y][p.x] = p.c
                     io.emit('set', {
                         x: p.x,
