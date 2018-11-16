@@ -1,7 +1,7 @@
-function zeros(dimensions) {
+function dimensional_array(dimensions,default_value) {
     var array = [];
     for (var i = 0; i < dimensions[0]; ++i) {
-        array.push(dimensions.length == 1 ? 0 : zeros(dimensions.slice(1)));
+        array.push(dimensions.length == 1 ? default_value : dimensional_array(dimensions.slice(1), default_value));
     }
     return array;
 }
@@ -22,7 +22,7 @@ try {
     pixels = JSON.parse(fs.readFileSync(cfg["pixels_path"], "utf8"));
 }
 catch (e) {
-    pixels = zeros([DIM[1], DIM[0]]);
+    pixels = dimensional_array([DIM[1], DIM[0]], cfg["default_color"]);
     console.log(e);
 }
 
@@ -33,15 +33,16 @@ io.on('connection', function(socket) {
     console.log("[CONNECTION] Online: " + io.engine.clientsCount)
     socket.emit('init', pixels);
     socket.emit("users", io.engine.clientsCount);
-    socket.on('flip', function(p) {
+    socket.on('set', function(p) {
         if (ratelimits[socket.id] && ((new Date()).getTime() - ratelimits[socket.id]) >= 100) {
             ratelimits[socket.id] = (new Date()).getTime();
             try {
-                if (p.y < DIM[1] && p.x < DIM[0] && p.y>=0 && p.x >= 0) {
-                    pixels[p.y][p.x] = +(!pixels[p.y][p.x]);
-                    io.emit('flip', {
+                if (p.y < DIM[1] && p.x < DIM[0] && p.y>=0 && p.x >= 0 && Number.isInteger(p.c) && p.c >=0 && p.c <= 15) {
+                    pixels[p.y][p.x] = p.c
+                    io.emit('set', {
                         x: p.x,
-                        y: p.y
+                        y: p.y,
+                        c: p.c
                     });
                 }
             }
@@ -51,16 +52,16 @@ io.on('connection', function(socket) {
         else if (!ratelimits[socket.id]) {
             ratelimits[socket.id] = (new Date()).getTime();
             try {
-                if (p.y < DIM[1] && p.x < DIM[0] && p.y>=0 && p.x >= 0) {
-                    pixels[p.y][p.x] = +(!pixels[p.y][p.x]);
-                    io.emit('flip', {
+                if (p.y < DIM[1] && p.x < DIM[0] && p.y>=0 && p.x >= 0 && Number.isInteger(p.c) && p.c >=0 && p.c <= 15) {
+                    pixels[p.y][p.x] = p.c
+                    io.emit('set', {
                         x: p.x,
-                        y: p.y
+                        y: p.y,
+                        c: p.c
                     });
                 }
             }
             catch (e) {
-              console.log(e);
             }
         }
     });

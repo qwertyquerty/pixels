@@ -1,10 +1,71 @@
 <canvas id="can"></canvas>
-<style>body,html{margin: 0;} #can{touch-action: manipulation;}</style>
+
+
+
+<form id="colorpicker">
+ <input class="colorbutton" type="radio" name="c" value="0" checked>
+ <input class="colorbutton" type="radio" name="c" value="1">
+ <input class="colorbutton" type="radio" name="c" value="2">
+ <input class="colorbutton" type="radio" name="c" value="3">
+ <input class="colorbutton" type="radio" name="c" value="4">
+ <input class="colorbutton" type="radio" name="c" value="5">
+ <input class="colorbutton" type="radio" name="c" value="6">
+ <input class="colorbutton" type="radio" name="c" value="7"><br>
+ <input class="colorbutton" type="radio" name="c" value="8">
+ <input class="colorbutton" type="radio" name="c" value="9">
+ <input class="colorbutton" type="radio" name="c" value="10">
+ <input class="colorbutton" type="radio" name="c" value="11">
+ <input class="colorbutton" type="radio" name="c" value="12">
+ <input class="colorbutton" type="radio" name="c" value="13">
+ <input class="colorbutton" type="radio" name="c" value="14">
+ <input class="colorbutton" type="radio" name="c" value="15">
+</form>
+
+
+<style>
+body,html{margin: 0; background: #000;} #can{touch-action: manipulation; user-select: none;}
+.colorbutton {
+     -webkit-appearance: none;
+     -moz-appearance: none;
+     appearance: none;
+     display: inline-block;
+     top: 10px;
+     height: 30px;
+     width: 30px;
+     border: 0;
+     cursor: pointer;
+     margin-right: 7px;
+     outline: none;
+     border-radius: 0px;
+     border: solid 0px;
+     margin: 1px;
+     border: solid #555 3px;
+     user-select: none;
+}
+
+.colorbutton:hover {
+     border: solid #8888ff 3px;
+}
+.colorbutton:checked {
+    border: solid #8888ff 3px;
+}
+
+#colorpicker {
+  position: fixed;
+  display: inline;
+  top: 7px;
+  left: 7px;
+  user-select: none;
+}
+
+</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.slim.js"></script>
 <script>
 var colors = ["#000000", "#FFFFFF", "#880000", "#AAFFEE", "#CC44CC", "#00CC55", "#0000AA", "#EEEE77", "#DD8855", "#664400", "#FF7777", "#333333", "#777777", "#AAFF66", "#0088FF", "#BBBBBB"];
-    
+
+$(".colorbutton").each(function (index) {$(this).css('background-color', colors[index])})
+
 var io = io();
 
 function getTouchPos(c, e) {
@@ -28,9 +89,10 @@ $("#can").bind('click', function(e) {
     var p = getMousePos(canvas, e);
     var p = {
         x: Math.floor(p.x / SCALE),
-        y: Math.floor(p.y / SCALE)
+        y: Math.floor(p.y / SCALE),
+        c: parseInt(document.querySelector('input[name="c"]:checked').value)
     }
-    io.emit("flip", p)
+    io.emit("set", p)
 
 })
 
@@ -68,8 +130,8 @@ io.on("users", function(users) {
     window.document.title = users + " Clients Online"
 });
 
-io.on("flip", function(p) {
-    pixels[p.y][p.x] = +(!pixels[p.y][p.x]);
+io.on("set", function(p) {
+    pixels[p.y][p.x] = p.c
     mark(p.x, p.y, pixels[p.y][p.x])
 });
 </script>
