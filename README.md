@@ -2,6 +2,8 @@
 
 A pixel canvas anyone can draw on.
 
+### [My Discord Server](https://discord.gg/JF3kg77)
+
 ## Setup
 
 - **`git clone https://github.com/qwertyquerty/pixels`**
