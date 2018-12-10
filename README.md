@@ -38,12 +38,8 @@ A pixel canvas anyone can draw on.
 - `pixels_path`: The JSON file to save the pixels to
 - `default_color`: The default color for the board
 
-## Server
-
-### Vanilla Client Code: [http://142.93.72.14:40/](http://142.93.72.14:40/)
-
-### Alternate Client Code: [http://draw.al1l.com/](http://draw.al1l.com/)
-
 ## Example
+
+(Before color was added)
 
 ![https://i.imgur.com/ROEnFig.png](https://i.imgur.com/ROEnFig.png)
