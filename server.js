@@ -36,7 +36,7 @@ io.on('connection', function(socket) {
     socket.emit('init', pixels);
     socket.emit("users", io.engine.clientsCount);
     socket.on('set', function(p) {
-        if (ratelimits[socket.id] && ((new Date()).getTime() - ratelimits[socket.id]) >= 100) {
+        if (ratelimits[socket.id] && ((new Date()).getTime() - ratelimits[socket.id]) >= cfg["ratelimit"]) {
             ratelimits[socket.id] = (new Date()).getTime();
             try {
                 if (p.y < DIM[1] && p.x < DIM[0] && p.y>=0 && p.x >= 0 && Number.isInteger(p.c) && p.c >=0 && p.c < colors.length) {
