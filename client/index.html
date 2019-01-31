@@ -58,6 +58,23 @@ body,html{margin: 0; background: #000;} #can{touch-action: manipulation; user-se
   user-select: none;
 }
 
+::-webkit-scrollbar {
+  width: 10px; 
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #333;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fff; 
+}
+
+::-webkit-scrollbar-corner {
+  background: #333;
+}
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.slim.js"></script>
