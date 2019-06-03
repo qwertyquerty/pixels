@@ -36,8 +36,8 @@ io.on('connection', function(socket) {
     socket.emit('init', pixels);
     socket.emit("users", io.engine.clientsCount);
     socket.on('set', function(p) {
-        if (ratelimits[socket.id] && ((new Date()).getTime() - ratelimits[socket.id]) >= cfg["ratelimit"]) {
-            ratelimits[socket.id] = (new Date()).getTime();
+        if (ratelimits[socket.handshake.address] && ((new Date()).getTime() - ratelimits[socket.handshake.address]) >= cfg["ratelimit"]) {
+            ratelimits[socket.handshake.address] = (new Date()).getTime();
             try {
                 if (p.y < DIM[1] && p.x < DIM[0] && p.y>=0 && p.x >= 0 && Number.isInteger(p.c) && p.c >=0 && p.c < colors.length) {
                     pixels[p.y][p.x] = p.c
@@ -51,8 +51,8 @@ io.on('connection', function(socket) {
             catch (e) {
             }
         }
-        else if (!ratelimits[socket.id]) {
-            ratelimits[socket.id] = (new Date()).getTime();
+        else if (!ratelimits[socket.handshake.address]) {
+            ratelimits[socket.handshake.address] = (new Date()).getTime();
             try {
                 if (p.y < DIM[1] && p.x < DIM[0] && p.y>=0 && p.x >= 0 && Number.isInteger(p.c) && p.c >=0 && p.c < colors.length) {
                     pixels[p.y][p.x] = p.c

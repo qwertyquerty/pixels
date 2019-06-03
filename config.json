@@ -1,10 +1,10 @@
 {
  "host": "0.0.0.0",
  "port": 80,
- "dim": [500,500],
+ "dim": [640,360],
  "save_interval": 60000,
  "init_interval": 10000,
  "pixels_path": "./pixels.json",
  "default_color": 0,
- "ratelimit": 75
+ "ratelimit": 50
 }
