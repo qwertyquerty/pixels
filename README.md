@@ -37,9 +37,3 @@ A pixel canvas anyone can draw on.
 - `init_interval`: How often to send the entire board to every client to correct mistakes (like unrecieved pixel changes)
 - `pixels_path`: The JSON file to save the pixels to
 - `default_color`: The default color for the board
-
-## Example
-
-(Before color was added)
-
-![https://i.imgur.com/ROEnFig.png](https://i.imgur.com/ROEnFig.png)
