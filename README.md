@@ -2,7 +2,7 @@
 
 A pixel canvas anyone can draw on.
 
-### [Suuport Discord](https://discord.gg/JF3kg77)
+### [Support Discord](https://discord.gg/JF3kg77)
 
 ## Setup
 
