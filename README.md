@@ -2,13 +2,13 @@
 
 A pixel canvas anyone can draw on.
 
-### [Suuport Discord](https://discord.gg/JF3kg77)
+### [Support Discord](https://discord.gg/JF3kg77)
 
 ## Setup
 
 - **`git clone https://github.com/qwertyquerty/pixels`**
 
-- **`cd pixels`**
+- **`cdhe  pixels`**
 
 - **`npm i`**
 
@@ -30,10 +30,10 @@ A pixel canvas anyone can draw on.
 }
 ```
 
-- `host`: The host ip
-- `port`: The port to host on (80 is default http port)
+- `host`: The host IP
+- `port`: The port to host on (80 is the default HTTP port)
 - `dim`: The dimensions of the board. If the board is too big, some serious lag can happen. Usually keep this under `[1000,1000]`
-- `save_interval`: How often to save the board to `pixels_path` in case the server crashes, it can recover the pixels
-- `init_interval`: How often to send the entire board to every client to correct mistakes (like unrecieved pixel changes)
+- `save_interval`: How often to save the board to `pixels_path` in case the server crashes it can recover the pixels
+- `init_interval`: How often to send the entire board to every client to correct mistakes (like unreceived pixel changes)
 - `pixels_path`: The JSON file to save the pixels to
 - `default_color`: The default color for the board
